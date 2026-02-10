@@ -22,13 +22,18 @@ class MetronomeService {
     _soundpool = Soundpool.fromOptions(
       options: const SoundpoolOptions(
         streamType: StreamType.music,
-        maxStreams: 1,
+        maxStreams: 2,
       ),
     );
 
     // Lade Click-Sound
     final asset = await rootBundle.load('assets/click.wav');
     _clickSoundId = await _soundpool!.load(asset);
+
+    // Warmup: stumm abspielen, damit Audio-Stream bereit ist
+    final streamId = await _soundpool!.play(_clickSoundId!);
+    await _soundpool!.setVolume(soundId: streamId, volume: 0.0);
+    await _soundpool!.stop(streamId);
   }
 
   /// Starte Metronom mit gegebenem BPM
