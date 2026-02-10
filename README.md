@@ -1,2 +1,2 @@
 # drumtempo2
-DrumTempo2 - Metronome App
+DrumTempo 2 - Metronome App
